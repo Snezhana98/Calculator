@@ -67,10 +67,6 @@ namespace Calculator
                     VvodPrimera.Text = "Деление на 0";
                     Vivod.proverka = 1;
                 }
-                else if (Vivod.ZnakString == "kvad")
-                {
-                    VvodPrimera.Text = Vivod.res().ToString();
-                }
                 else
                 {
                     VerhVivodPrimera.Text = Vivod.FirstDigit + " " + Vivod.k + " " + Vivod.SecondDigit;
@@ -105,8 +101,11 @@ namespace Calculator
                             Vivod.ZnakString = "div";
                             break;
                     case "x^2":
-                        Vivod.ZnakString = "kvad";
-                        break;
+                        {
+                            Vivod.ZnakString = "kvad";
+                            VvodPrimera.Text = Vivod.res().ToString();
+                            break;
+                        }
 
                 }
             }
