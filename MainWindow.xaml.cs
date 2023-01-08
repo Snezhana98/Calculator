@@ -32,8 +32,12 @@ namespace Calculator
             if (sender is Button btn)
             {
                 if (Vivod == null)
+                {
                     Vivod = new ClassCalc();
-                int n = int.Parse(btn.Content.ToString());
+                    VerhVivodPrimera.Text = "";
+                }
+
+                    int n = int.Parse(btn.Content.ToString());
                 VvodPrimera.Text = n.ToString();
 
                 if (Vivod.ZnakString == null)
@@ -63,11 +67,16 @@ namespace Calculator
                     VvodPrimera.Text = "Деление на 0";
                     Vivod.proverka = 1;
                 }
+                else if (Vivod.ZnakString == "kvad")
+                {
+                    VvodPrimera.Text = Vivod.res().ToString();
+                }
                 else
                 {
-                    VerhVivodPrimera.Text = Vivod.SecondDigit + " " + Vivod.k + " " + Vivod.FirstDigit;
-                    //VvodPrimera.Text = Vivod.res().ToString();
+                    VerhVivodPrimera.Text = Vivod.FirstDigit + " " + Vivod.k + " " + Vivod.SecondDigit;
+                    VvodPrimera.Text = Vivod.res().ToString();
                 }
+                Vivod = null;
             }
         }
 
@@ -77,10 +86,11 @@ namespace Calculator
             {
                 Vivod.ZnakString = btn.Content.ToString();
                 Vivod.k = Vivod.ZnakString;
-                VerhVivodPrimera.Text = Vivod.k + " " + Vivod.FirstDigit;
-                
-               
-                    switch (Vivod.ZnakString)
+                if (Vivod.ZnakString != "x^2")
+                VerhVivodPrimera.Text = Vivod.FirstDigit + " " + Vivod.k;
+                else VerhVivodPrimera.Text = Vivod.FirstDigit + "^2 ";
+
+                switch (Vivod.ZnakString)
                     {
                         case "+":
                             Vivod.ZnakString = "plus";
@@ -94,7 +104,10 @@ namespace Calculator
                         case "/":
                             Vivod.ZnakString = "div";
                             break;
-                    
+                    case "x^2":
+                        Vivod.ZnakString = "kvad";
+                        break;
+
                 }
             }
         }
